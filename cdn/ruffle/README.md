@@ -20,7 +20,7 @@ Here you go:
 Or use the official one:
 
 ```html
-<script src="https://testing-platform-games.github.io/cdn/ruffle/ruffle.js"></script>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 ```
 
 ### Javascript API
