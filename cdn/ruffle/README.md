@@ -25,7 +25,7 @@ Or use the official one:
 
 ### Javascript API
 
-If you want to control the Ruffle player, you may use our Javascript API.
+If you want to control the Ruffle player, you can use the Javascript API.
 
 ```html
 <script>
@@ -39,7 +39,8 @@ If you want to control the Ruffle player, you may use our Javascript API.
         player.load("movie.swf");
     });
 </script>
-<script src="path/to/ruffle/ruffle.js"></script>
+<script src="https://testing-platform-games.github.io/cdn/ruffle/ruffle.js"></script>
+## Use the official one if you like to use the official instance: <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 ```
 
 ## Building, testing or contributing
