@@ -2,3 +2,12 @@ body {
     background-color: black;
     color: white;
 }
+
+a {
+    color: white; /* Set link color to white */
+    text-decoration: none; /* Remove underline from links */
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
