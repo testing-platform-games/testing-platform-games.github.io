@@ -1,9 +1,20 @@
 <!DOCTYPE html>
+<html>
+<head>
 <title>Mission in Snowdriftland</title>
+</head>
+<body>
 <a href="/">Back</a>
-<table width="100%" height="100%">
-<object type="application/x-shockwave-flash" width="100%" height="100%">
-<param name="movie" value="misnowdriftland_final.swf"></param>
-<param name="wmode" value="opaque"></param>
-<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-</object>
+<script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("container");
+        container.appendChild(player);
+        player.load("misnowdriftland_final.swf");
+    });
+</script>
+<script src="/cdn/ruffle/ruffle.js"></script>
+</html>
+</body>
