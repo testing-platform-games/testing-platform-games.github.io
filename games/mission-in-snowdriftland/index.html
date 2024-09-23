@@ -12,8 +12,6 @@
                            <object type="application/x-shockwave-flash" id="stage" data="misnowdriftland_final.swf" width="900" height="578" title="stage">
                             <param name="allowScriptAccess" value="sameDomain" />
                             <param name="movie" value="misnowdriftland_final.swf" />
-                            <param name="quality" value="high" />
-                            <param name="menu" value="false" />
                         </object>
                     </td>
                 </tr>
@@ -22,7 +20,13 @@
 <script src="/cdn/ruffle/ruffle.js"></script>
 <script>
 window.RufflePlayer.config = {
-    autoplay: "on"
+        "autoplay": "on",
+        "allowScriptAccess": true,
+        "showSwfDownload": false,
+        "quality": "high",
+        "unmuteOverlay": "hidden",
+        "openUrlMode" : "allow",
+        "contextMenu": "off",
 };
 </script>
 </body>
