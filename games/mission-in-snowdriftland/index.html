@@ -5,16 +5,11 @@
 </head>
 <body>
 <a href="/">Back</a>
-<script>
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.addEventListener("load", (event) => {
-        const ruffle = window.RufflePlayer.newest();
-        const player = ruffle.createPlayer();
-        const container = document.getElementById("container");
-        container.appendChild(player);
-        player.load("misnowdriftland_final.swf");
-    });
-</script>
+    
+<object>
+    <embed src="path/to/movie.swf" width="550" height="400" />
+</object>
+    
 <script src="/cdn/ruffle/ruffle.js"></script>
-</html>
 </body>
+</html>
