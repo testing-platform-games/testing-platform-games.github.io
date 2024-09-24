@@ -5,12 +5,14 @@
     <param name="wmode" value="opaque"></param> 
 </object>
 <script src="/cdn/ruffle/ruffle.js"></script>
-window.RufflePlayer = window.RufflePlayer || {};
+<script>
 window.RufflePlayer.config = {
-
-    // Options affecting files only
-    "allowScriptAccess": false,
-    "autoplay": "on",
-    "unmuteOverlay": "hidden",
-    "letterbox": "on",
+        "autoplay": "on",
+        "allowScriptAccess": true,
+        "showSwfDownload": false,
+        "quality": "high",
+        "unmuteOverlay": "hidden",
+        "openUrlMode" : "allow",
+        "contextMenu": "off",
 };
+</script>
