@@ -2,6 +2,56 @@
 <html>
 <head>
 <title>Mission in Snowdriftland</title>
+<script>
+const isUserUsingMobile = () => {
+    // User agent string method
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Screen resolution method
+    if (!isMobile) {
+        let screenWidth = window.screen.width;
+        let screenHeight = window.screen.height;
+        isMobile = (screenWidth < 768 || screenHeight < 768);
+    }
+
+    // Touch events method
+    if (!isMobile) {
+        isMobile = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    }
+
+    // CSS media queries method
+    if (!isMobile) {
+        let bodyElement = document.getElementsByTagName('body')[0];
+        isMobile = window.getComputedStyle(bodyElement).getPropertyValue('content').indexOf('mobile') !== -1;
+    }
+
+    return isMobile;
+}
+
+const showMobileNotSupportedMessage = () => {
+    // Create a div element for the message
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = "Mobile Devices are not supported";
+    messageDiv.style.position = 'fixed';
+    messageDiv.style.top = '50%';
+    messageDiv.style.left = '50%';
+    messageDiv.style.transform = 'translate(-50%, -50%)';
+    messageDiv.style.backgroundColor = 'white';
+    messageDiv.style.padding = '20px';
+    messageDiv.style.border = '1px solid black';
+    messageDiv.style.zIndex = '1000';
+    messageDiv.style.textAlign = 'center';
+    messageDiv.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+
+    // Append the message div to the body
+    document.body.appendChild(messageDiv);
+}
+
+// Execute the device check
+if (isUserUsingMobile()) {
+    showMobileNotSupportedMessage();
+}
+</script>
 </head>
 <body bgcolor="#FFFFFF">
 <a href="/">Back</a>
