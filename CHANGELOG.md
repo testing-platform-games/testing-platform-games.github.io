@@ -8,3 +8,7 @@
 - Crystal Seeker 3D is now avalible!
 ### 9/16/24
 - Paper Minecraft added
+### 12/3/24
+- New logo
+- Ruffle updated
+- Pokemon DP Shareware demo added
