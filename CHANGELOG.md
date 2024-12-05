@@ -12,3 +12,5 @@
 - New logo
 - Ruffle updated
 - Pokemon DP Shareware demo added
+### 12/5/24
+- Added Infiltrating the Airship and Fleeing the Complex
