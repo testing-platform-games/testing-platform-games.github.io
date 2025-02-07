@@ -67,7 +67,7 @@
       var Module = {
         preRun: [ preloadIndexedDB, resizeGameCanvas ],
         postRun: [],
-        arguments: ['SebbyWebby12345'],
+        arguments: [],
         print: function(text) {
             if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
             console.log(text);
@@ -103,4 +103,4 @@
         root.appendChild(elem);
     }
     </script>
-    <script async crossorigin type="text/javascript" src="//cdn.classicube.net/client/latest/ClassiCube.js?v=20" onerror="onDownloadFailed(this)" referrerpolicy="no-referrer-when-downgrade"></script>
+    <script async crossorigin type="text/javascript" src="//cdn.classicube.net/client/latest/ClassiCube.js" onerror="onDownloadFailed(this)" referrerpolicy="no-referrer-when-downgrade"></script>
