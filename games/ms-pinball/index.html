@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <title>Space Cadet Pinball</title>
+        <link rel="stylesheet" href="index.css">
+        <!--<script src="https://integration.gamepix.com/sdk/v3/gamepix.sdk.js"></script>-->
+    </head>
+    <body>
+        <div id="background"></div>
+        <canvas id="canvas"></canvas>
+        <img id="keyboard" src="keyboard.png">
+        <div id="keyboard-container" class="simple-keyboard"></div>
+        <div id="loader-container">
+            <div id="loader-row">
+                <div id="loader-text">0%</div>
+                <img id="loader-img" src="loader.gif" />
+            </div>
+        </div>
+        <script>
+        
+         window.SDK = typeof GamePix === "undefined" ? {} : GamePix;
+         if (typeof native === "undefined") {
+            window.native = {
+                showKeyboard: function() {
+                },
+                hideKeyboard: function() {
+                },
+                finish: function() {
+                },
+                lang: function() {
+                    // const lang = new URLSearchParams(location.search).get("lang");
+                    // if (lang === "ru" || lang === "fr") {
+                    //     return lang;
+                    // } else {
+                        return "en";
+                    // }
+                }
+            };
+         }
+        </script>
+        <script src="index.js"></script>
+    </body>
+</html>
