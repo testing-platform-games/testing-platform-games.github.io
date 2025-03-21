@@ -14,3 +14,6 @@
 - Pokemon DP Shareware demo added
 ### 12/5/24
 - Added Infiltrating the Airship and Fleeing the Complex
+### 3/21/25
+- Chex Quest 1 & 2 Released!
+- Updated Ruffle instance
