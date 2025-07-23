@@ -1,84 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-                <link rel="manifest" href="manifest.json">
-                <script>
-                    if ('serviceWorker' in navigator) {
-                        window.addEventListener("load", () => {
-                            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-                                console.log('ServiceWorker registered');
-                              }).catch(function(err) {
-                                console.log('ServiceWorker error: ', err);
-                              });
-                        })
-                    }
-                </script>    
-<link rel="stylesheet" href="styles.css">
-<title>Testing Platform Games</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testing Platform Games</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #222;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      margin-top: 1em;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1em;
+    }
+
+    nav {
+      flex: 1 1 200px;
+      background-color: #eee;
+      padding: 1em;
+      border-right: 2px solid #ccc;
+    }
+
+    main {
+      flex: 4 1 600px;
+      padding: 1em;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 0.5em 0;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .category {
+      background-color: white;
+      border: 1px solid #ccc;
+      margin-bottom: 1em;
+      padding: 1em;
+      border-radius: 8px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      nav {
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+      }
+    }
+  </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+          console.log('ServiceWorker registered');
+        }).catch(function (err) {
+          console.log('ServiceWorker error: ', err);
+        });
+      });
+    }
+  </script>
 </head>
 <body>
-        
-<h1>Welcome to Testing Platform Games!</h1>
-<h3>You are now on the GitHub site</h3>
-<p style="color:red;">"Games/Resources for the ones that don't get support for any!"</p>
-<p><a href="/credits.html">Credits</a></p>
-<p><a href="/resources.html">Resources</a></p>
-<p><a href="https://github.com/testing-platform-games/testing-platform-games.github.io">GitHub Repository</a></p>
-<p><a href="https://github.com/testing-platform-games/testing-platform-games.github.io/issues/new/choose">Request a game/Report an issue</a></p>
 
-<h2>Bloons TD:</h2>
-<ul>
-<li><a href="/games/bloonstd.html">Bloons TD</a></li>
-<li><a href="/games/bloonstd2.html">Bloons TD 2</a></li>
-<li><a href="/games/bloonstd3.html">Bloons TD 3</a></li>
-<li><a href="/games/bloonstd4.html">Bloons TD 4</a></li>
-<li><a href="/games/bloonstd4exp.html">Bloons TD 4 Expansion</a></li>
-<li><a href="/games/bloonstd5.html">Bloons TD 5</a></li>
-</ul>
-<h2>The Henry Stickmin Collection:</h2>
-<ul>
-<li><a href="/games/crossing-the-pit.html">Crossing the Pit</a></li>
-<li><a href="/games/breaking-the-bank.html">Breaking the Bank</a></li>
-<li><a href="/games/escaping-the-prison.html">Escaping the Prison</a></li>
-<li><a href="/games/stealing-the-diamond.html">Stealing the Diamond</a></li>
-<li><a href="/games/infiltrating-the-airship.html">Infiltrating the Airship</a></li>
-<li><a href="/games/fleeing-the-complex.html">Fleeing the Complex</a></li>
-</ul>
-<h2>Other:</h2>
-<ul>
-<li><a href="/games/qwop.html">QWOP</a></li>
-<li><a href="/games/super-mario-63.html">Super Mario 63</a></li>
-<li><a href="/games/bloxors.html">Bloxors</a></li>
-<li><a href="/games/yet-another-doom-clone/advice.html">Yet Another Doom Clone (YADC)</a></li>
-<li><a href="/games/classicube">Classic Minecraft (ClassiCube)</a></li>
-<li><a href="/games/sprinter.html">Sprinter</a></li>
-<li><a href="/games/mission-in-snowdriftland/">Mission in Snowdriftland</a></li>
-<li><a href="/games/crystal-seeker-3d.html">Crystal Seeker 3D</a></li>
-<li><a href="/games/flappy-bird/">Flappy Bird</a></li>
-<li><a href="/games/paper-mc.html">Paper Minecraft</a></li>
-<li><a href="/games/moto-x3m.html">Moto X3M</a></li>
-<li><a href="/games/moto-x3m-2.html">Moto X3M 2</a></li>
-<li><a href="/games/poke-dp-shareware-demo.html">Pokemon DP (Shareware Demo)</a></li>
-<li><a href="/games/slope-y8.html">Slope (Y8)</a></li>
-</ul>
-<h2>ID Software/Related Games:</h2>
-<ul>
-<li><a href="/games/doom-shareware.html">DOOM (Shareware)</a></li>
-<li><a href="/games/freedoom1.html">FreeDOOM Phase 1</a></li>
-<li><a href="/games/freedoom2.html">FreeDOOM Phase 2</a></li>
-<li><a href="/games/wolf3d-advisary-warning.html">Wolfenstien 3D (Shareware)</a></li>
-<li><a href="/games/duke3d-shareware.html">Duke Nukem' 3D (Shareware)</a></li>
-<li><a href="/games/quake-shareware.html">Quake (Shareware)</a></li>
-<li><a href="/srb2web">Sonic Robo Blast 2</a></li>
-<li><a href="/games/chex.html">Chex Quest</a></li>
-<li><a href="/games/chex2.html">Chex Quest 2</a></li>
-</ul>
-<h2>Testing Platform Games Original Games:</h2>
-<ul>
-<li>Coming Soon!</li>
-</ul>
-<h2>Support:</h2>
-<ul>
-</ul>
+<header>
+  <h1>Testing Platform Games</h1>
+  <p><em>Games/Resources for the ones that don't get support for any!</em></p>
+</header>
+
+<div class="container">
+  <nav>
+    <h3>Navigation</h3>
+    <ul>
+      <li><a href="/credits.html">Credits</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io">GitHub Repository</a></li>
+      <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io/issues/new/choose">Request/Report Issue</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="category">
+      <h2>Bloons TD</h2>
+      <ul>
+        <li><a href="/games/bloonstd.html">Bloons TD</a></li>
+        <li><a href="/games/bloonstd2.html">Bloons TD 2</a></li>
+        <li><a href="/games/bloonstd3.html">Bloons TD 3</a></li>
+        <li><a href="/games/bloonstd4.html">Bloons TD 4</a></li>
+        <li><a href="/games/bloonstd4exp.html">Bloons TD 4 Expansion</a></li>
+        <li><a href="/games/bloonstd5.html">Bloons TD 5</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Henry Stickmin Collection</h2>
+      <ul>
+        <li><a href="/games/crossing-the-pit.html">Crossing the Pit</a></li>
+        <li><a href="/games/breaking-the-bank.html">Breaking the Bank</a></li>
+        <li><a href="/games/escaping-the-prison.html">Escaping the Prison</a></li>
+        <li><a href="/games/stealing-the-diamond.html">Stealing the Diamond</a></li>
+        <li><a href="/games/infiltrating-the-airship.html">Infiltrating the Airship</a></li>
+        <li><a href="/games/fleeing-the-complex.html">Fleeing the Complex</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Other Games</h2>
+      <ul>
+        <li><a href="/games/qwop.html">QWOP</a></li>
+        <li><a href="/games/super-mario-63.html">Super Mario 63</a></li>
+        <li><a href="/games/bloxors.html">Bloxors</a></li>
+        <li><a href="/games/yet-another-doom-clone/advice.html">Yet Another Doom Clone</a></li>
+        <li><a href="/games/classicube">Classic Minecraft (ClassiCube)</a></li>
+        <li><a href="/games/sprinter.html">Sprinter</a></li>
+        <li><a href="/games/mission-in-snowdriftland/">Mission in Snowdriftland</a></li>
+        <li><a href="/games/crystal-seeker-3d.html">Crystal Seeker 3D</a></li>
+        <li><a href="/games/flappy-bird/">Flappy Bird</a></li>
+        <li><a href="/games/paper-mc.html">Paper Minecraft</a></li>
+        <li><a href="/games/moto-x3m.html">Moto X3M</a></li>
+        <li><a href="/games/moto-x3m-2.html">Moto X3M 2</a></li>
+        <li><a href="/games/poke-dp-shareware-demo.html">Pokemon DP (Demo)</a></li>
+        <li><a href="/games/slope-y8.html">Slope (Y8)</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>ID Software/Related Games</h2>
+      <ul>
+        <li><a href="/games/doom-shareware.html">DOOM (Shareware)</a></li>
+        <li><a href="/games/freedoom1.html">FreeDOOM Phase 1</a></li>
+        <li><a href="/games/freedoom2.html">FreeDOOM Phase 2</a></li>
+        <li><a href="/games/wolf3d-advisary-warning.html">Wolfenstein 3D (Shareware)</a></li>
+        <li><a href="/games/duke3d-shareware.html">Duke Nukem 3D (Shareware)</a></li>
+        <li><a href="/games/quake-shareware.html">Quake (Shareware)</a></li>
+        <li><a href="/srb2web">Sonic Robo Blast 2</a></li>
+        <li><a href="/games/chex.html">Chex Quest</a></li>
+        <li><a href="/games/chex2.html">Chex Quest 2</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Original Games</h2>
+      <p>Coming Soon!</p>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <p>&copy; 2025 Testing Platform Games</p>
+</footer>
+
 </body>
 </html>
