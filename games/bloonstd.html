@@ -1,7 +1,43 @@
-<title>Bloons TD</title>
-<a href=" /">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%">
-    <param name="movie" value="/cdn/bloonstd.swf"></param>
-    <param name="wmode" value="opaque"></param>
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloons TD</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    object {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: #222;
+      color: #fff;
+      padding: 6px 12px;
+      text-decoration: none;
+      font-family: sans-serif;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <a class="back-link" href="/">← Back</a>
+  <object type="application/x-shockwave-flash">
+    <param name="movie" value="/cdn/bloonstd.swf" />
+    <param name="quality" value="low" />
+    <param name="wmode" value="opaque" />
+  </object>
+  <script src="/cdn/ruffle/ruffle.js"></script>
+</body>
+</html>
