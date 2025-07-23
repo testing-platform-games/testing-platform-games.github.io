@@ -1,8 +1,56 @@
-<title>Bloons TD 5</title>
-<a href="/">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%"> 
-    <param name="movie" value="/cdn/bloonstd5.swf"></param> 
-    <param name="wmode" value="opaque"></param> 
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
-<p>WARNING: THIS GAME IS VERY LAGGY AND WILL NEED A BEEFY COMPUTER!!1</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloons TD 5</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    object {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    a.back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #222;
+      color: white;
+      padding: 6px 12px;
+      text-decoration: none;
+      font-family: sans-serif;
+      border-radius: 4px;
+      z-index: 10;
+    }
+    .warning {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(255, 0, 0, 0.8);
+      color: white;
+      padding: 6px 12px;
+      font-family: sans-serif;
+      font-size: 14px;
+      border-radius: 4px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <a class="back-link" href="/">← Back</a>
+  <object type="application/x-shockwave-flash">
+    <param name="movie" value="/cdn/bloonstd5.swf" />
+    <param name="quality" value="low" />
+    <param name="wmode" value="opaque" />
+  </object>
+  <div class="warning">⚠️ WARNING: THIS GAME IS VERY LAGGY AND WILL NEED A BEEFY COMPUTER!!!</div>
+  <script src="/cdn/ruffle/ruffle.js"></script>
+</body>
+</html>
