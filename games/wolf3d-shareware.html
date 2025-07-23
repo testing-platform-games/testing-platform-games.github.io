@@ -1,5 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Wolfenstein 3D (Shareware)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wolfenstein 3D (Shareware)</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background-color: #000;
+    }
+    .topbar {
+      background: #111;
+      padding: 10px;
+      text-align: left;
+    }
+    .topbar a {
+      color: #0af;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    iframe {
+      width: 100%;
+      height: calc(100% - 40px);
+      border: none;
+      display: block;
+    }
+  </style>
 </head>
-<a href="/">Back</a>
-<iframe src="/games/wolf3d-shareware-embed.html" style="border:0px #ffffff none;" name="Wolfenstein 3D" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="100%" width="100%" allowfullscreen></iframe>
+<body>
+  <div class="topbar">
+    <a href="/">← Back to Home</a>
+  </div>
+  <iframe 
+    src="/games/wolf3d-shareware-embed.html"
+    title="Wolfenstein 3D"
+    allowfullscreen
+  ></iframe>
+</body>
+</html>
