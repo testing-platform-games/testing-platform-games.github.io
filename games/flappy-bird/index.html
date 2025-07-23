@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Bird</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #70c5ce;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      margin: 1rem;
+      text-decoration: none;
+      color: white;
+      background: #333;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    #game {
+      display: block;
+      margin: 0 auto;
+      border: 2px solid #000;
+      background: #fff;
+    }
+
+    .game-description {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-<a href="/">Back</a>
-    <div class="container">
-        <div class="game-title">
-        </div>
-        <div class="game-screen">
-            <canvas id="game" width="300" height="500"></canvas>
-            <p id="description" class="game-description">Press 'spacebar' or 'click' to begin</p>
-        </div>
+  <a href="/">← Back</a>
+
+  <div class="container">
+    <h1 class="game-title">Flappy Bird</h1>
+    <div class="game-screen">
+      <canvas id="game" width="300" height="500" aria-label="Flappy Bird game canvas"></canvas>
+      <p id="description" class="game-description">Press <kbd>Spacebar</kbd> or click to begin</p>
     </div>
-    <script src="main.js"></script>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
