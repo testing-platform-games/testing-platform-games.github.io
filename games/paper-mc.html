@@ -1,3 +1,37 @@
-<title>Paper Minceraft</title>
-<a href="/">Back</a>
-<iframe style="border:1px #FFFFFF none" src="/games/paper-mc-embed.html" title="iFrame" width="100%" height="100%" scrolling="no" frameborder="no" allow="fullscreen"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Paper Minecraft</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: #222;
+      color: #fff;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-family: sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <a class="back-link" href="/">← Back</a>
+  <iframe src="/games/paper-mc-embed.html" title="Paper Minecraft" allowfullscreen scrolling="no"></iframe>
+</body>
+</html>
