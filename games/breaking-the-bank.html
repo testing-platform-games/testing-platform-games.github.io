@@ -1,7 +1,33 @@
-<title>Breaking the Bank</title>
-<a href="/">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%">
-    <param name="movie" value="/cdn/breaking-the-bank.swf"></param>
-    <param name="wmode" value="opaque"></param>
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breaking the Bank</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+    </style>
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+</head>
+<body>
+    <a href="/" style="position:absolute; z-index:10; padding:10px; background:#fff; text-decoration:none;">Back</a>
+
+    <object type="application/x-shockwave-flash" width="100%" height="100%">
+        <param name="movie" value="/cdn/breaking-the-bank.swf">
+        <param name="wmode" value="opaque">
+        <param name="quality" value="low">
+        <param name="menu" value="false">
+        <embed src="/cdn/breaking-the-bank.swf" width="100%" height="100%" quality="low" wmode="opaque" menu="false" type="application/x-shockwave-flash"></embed>
+    </object>
+
+    <script src="/cdn/ruffle/ruffle.js"></script>
+</body>
+</html>
