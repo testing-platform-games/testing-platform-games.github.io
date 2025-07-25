@@ -1,4 +1,61 @@
-<title>Warning</title>
-<p>Warning: This game contain imagery that from around the 1930 - 1940's from a bad event that happened in Germany. We are not responsible for any trauma/etc. made by this game.</p>
-<p><button type="button"><a href="/games/wolf3d-shareware.html">Proceed</a></button></p>
-<p><button type="button"><a href="/">Go Back</a></button></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Warning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    p {
+      max-width: 500px;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      background-color: #444;
+      border: none;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover, .btn:focus {
+      background-color: #666;
+      outline: none;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    Warning: This game contains imagery from the 1930s - 1940s related to a tragic event in Germany.
+    We are not responsible for any trauma or distress caused by this game.
+  </p>
+  <div class="buttons">
+    <a href="/games/wolf3d-shareware.html" class="btn" role="button">Proceed</a>
+    <a href="/" class="btn" role="button">Go Back</a>
+  </div>
+</body>
+</html>
