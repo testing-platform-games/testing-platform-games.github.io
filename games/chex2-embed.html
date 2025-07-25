@@ -9,14 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chex Quest 2</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #dos {
+            width: 80vw;
+            max-width: 960px;
+            aspect-ratio: 4 / 3;
+        }
+    </style>
 </head>
 <body>
-  <div id="dos" style="width: 100vw; height: 60vw;"></div>
+    <div id="dos"></div>
 
-<script>
-    Dos(document.getElementById("dos"), {
-        url: "/cdn/chex2.jsdos",
-    });
-</script>
+    <script>
+        Dos(document.getElementById("dos"), {
+            url: "/cdn/chex2.jsdos",
+        });
+    </script>
 </body>
 </html>
