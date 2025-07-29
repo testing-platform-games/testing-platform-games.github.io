@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mario Kart DS (Demo)</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #000;
+            font-family: sans-serif;
+        }
+
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        #back-btn {
+            background: #ff4444;
+            border: none;
+            padding: 8px 16px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        iframe {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 50px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <button id="back-btn" onclick="goBack()">← Back</button>
+    </div>
+
+    <iframe src="mkdsdemo-embed.html" allowfullscreen></iframe>
+
+    <script>
+        function goBack() {
+            window.location.href = "/"; // Always go to root
+        }
+    </script>
+</body>
+</html>
