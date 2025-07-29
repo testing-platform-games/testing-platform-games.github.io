@@ -13,36 +13,30 @@
       color: white;
     }
 
-    a.back-link {
+    .back-link {
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 10;
-      color: #1e90ff;
+      color: #fff;
       text-decoration: none;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 6px 12px;
-      border-radius: 6px;
+      background: #1e90ff;
+      padding: 8px 16px;
+      border-radius: 8px;
       font-weight: bold;
+      border: 2px solid #0a5ec2;
+      box-shadow: 0 0 10px #0a5ec2;
+      transition: background 0.2s ease, transform 0.1s ease;
     }
 
-    a.back-link:hover {
-      color: #63a9ff;
+    .back-link:hover {
+      background: #63a9ff;
+      transform: scale(1.05);
     }
 
     #game-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    object {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
+      width: 100vw;
+      height: 100vh;
     }
 
     #rightclick-overlay {
@@ -71,25 +65,22 @@
 
   <a href="/" class="back-link">← Back</a>
 
-  <div id="game-container">
-    <object type="application/x-shockwave-flash" data="/cdn/moto-x3m.swf">
-      <param name="movie" value="/cdn/moto-x3m.swf" />
-      <param name="wmode" value="opaque" />
-    </object>
-  </div>
-
+  <div id="game-container"></div>
   <div id="rightclick-overlay">Right-click is disabled on this page</div>
 
   <script src="/cdn/ruffle/ruffle.js"></script>
   <script>
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.RufflePlayer.config = {
-      allowScriptAccess: false,
-      autoplay: "on",
-      unmuteOverlay: "hidden",
-      letterbox: "on",
-    };
+    const ruffle = window.RufflePlayer?.newest() || window.RufflePlayer?.createPlayer();
+    const container = document.getElementById("game-container");
+    if (ruffle && container) {
+      const player = ruffle.createPlayer();
+      player.style.width = "100%";
+      player.style.height = "100%";
+      container.appendChild(player);
+      player.load("/cdn/moto-x3m.swf");
+    }
 
+    // Right-click warning
     document.addEventListener('contextmenu', event => {
       event.preventDefault();
       const overlay = document.getElementById('rightclick-overlay');
