@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bloxors</title>
+  <title>Bloxorz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
@@ -48,9 +48,11 @@
   </div>
 
   <div class="game-container">
-    <object type="application/x-shockwave-flash" id="stage" data="/cdn/bloxors.swf" title="Bloxors">
+    <object type="application/x-shockwave-flash" id="stage" data="/cdn/bloxors.swf" title="Bloxorz">
       <param name="allowScriptAccess" value="sameDomain" />
       <param name="movie" value="/cdn/bloxors.swf" />
+      <param name="quality" value="high" />
+      <param name="wmode" value="opaque" />
     </object>
   </div>
 
@@ -61,7 +63,7 @@
       autoplay: "on",
       allowScriptAccess: true,
       showSwfDownload: false,
-      quality: "best",
+      quality: "high",
       unmuteOverlay: "hidden",
       openUrlMode: "allow",
       contextMenu: "off",
