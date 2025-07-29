@@ -1,7 +1,62 @@
-<title>Infiltrating the Airship</title>
-<a href="/">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%"> 
-    <param name="movie" value="/cdn/infiltrating-the-airshipgame.swf"></param> 
-    <param name="wmode" value="opaque"></param> 
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infiltrating the Airship</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .back {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            text-decoration: none;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .game-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        object {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a class="back" href="/">&larr; Back</a>
+    <div class="game-container">
+        <object type="application/x-shockwave-flash">
+            <param name="movie" value="/cdn/infiltrating-the-airshipgame.swf">
+            <param name="wmode" value="opaque">
+        </object>
+    </div>
+
+    <script src="/cdn/ruffle/ruffle.js"></script>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            autoplay: "on",
+            unmuteOverlay: "hidden",
+            letterbox: "on",
+            allowScriptAccess: false
+        };
+
+        // Disable right-click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+</body>
+</html>
