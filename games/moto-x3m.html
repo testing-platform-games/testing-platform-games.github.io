@@ -4,23 +4,89 @@
   <meta charset="UTF-8" />
   <title>Moto X3M</title>
   <style>
-    /* ... your styles ... */
+    /* Basic reset and layout */
+    html, body {
+      margin: 0; padding: 0;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                   Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      user-select: none; /* Disable text selection */
+    }
+    /* Back button */
+    a.back-link {
+      margin: 15px 0;
+      font-weight: 600;
+      color: #1e90ff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    a.back-link:hover,
+    a.back-link:focus {
+      color: #63a9ff;
+      text-decoration: underline;
+      outline: none;
+    }
+    /* Container for the game */
+    #game-container {
+      width: 800px;
+      height: 600px;
+      background: #000;
+      box-shadow: 0 0 30px rgba(30, 144, 255, 0.7);
+      flex-grow: 1;
+      display: flex;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    /* Make the object fill container */
+    object {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* Optional: subtle overlay for right-click message */
+    #rightclick-overlay {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(30, 144, 255, 0.9);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
+      user-select: none;
+    }
+    #rightclick-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body>
-  <a href="/" class="back-link">← Back</a>
-  <div id="game-container">
-    <object type="application/x-shockwave-flash" data="/cdn/moto-x3m.swf" width="800" height="600">
+
+  <a href="/" class="back-link" aria-label="Go back to homepage">← Back</a>
+
+  <div id="game-container" role="main" aria-label="Moto X3M game container">
+    <object type="application/x-shockwave-flash" data="/cdn/moto-x3m.swf" tabindex="0" aria-describedby="desc-moto-x3m">
       <param name="movie" value="/cdn/moto-x3m.swf" />
       <param name="wmode" value="opaque" />
     </object>
   </div>
 
+  <div id="rightclick-overlay" role="alert" aria-live="assertive">Right-click is disabled on this page</div>
+
   <script src="/cdn/ruffle/ruffle.js"></script>
   <script>
-    // Disable right-click menu everywhere on page
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
     window.RufflePlayer = window.RufflePlayer || {};
     window.RufflePlayer.config = {
       allowScriptAccess: false,
@@ -28,6 +94,21 @@
       unmuteOverlay: "hidden",
       letterbox: "on",
     };
+
+    // Disable right-click menu and show overlay message briefly
+    document.addEventListener('contextmenu', event => {
+      event.preventDefault();
+
+      const overlay = document.getElementById('rightclick-overlay');
+      if (overlay) {
+        overlay.classList.add('show');
+        clearTimeout(window._rightClickTimeout);
+        window._rightClickTimeout = setTimeout(() => {
+          overlay.classList.remove('show');
+        }, 1500);
+      }
+    });
   </script>
+
 </body>
 </html>
