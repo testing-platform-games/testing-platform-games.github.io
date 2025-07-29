@@ -1,17 +1,63 @@
-<title>Moto X3M 2</title>
-<a href="/">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%"> 
-    <param name="movie" value="/cdn/moto-x3m-2.swf"></param> 
-    <param name="wmode" value="opaque"></param> 
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
-<script>
-window.RufflePlayer = window.RufflePlayer || {};
-window.RufflePlayer.config = {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Moto X3M 2</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      font-family: sans-serif;
+    }
+    a.back-link {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #0077cc;
+      text-decoration: none;
+      user-select: none;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    #game-container {
+      width: 800px;
+      height: 600px;
+      background: black;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      flex-grow: 1;
+      display: flex;
+    }
+    object {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">← Back</a>
 
-    "allowScriptAccess": false,
-    "autoplay": "on",
-    "unmuteOverlay": "hidden",
-    "letterbox": "on",
-};
-</script>
+  <div id="game-container">
+    <object type="application/x-shockwave-flash" data="/cdn/moto-x3m-2.swf" width="100%" height="100%">
+      <param name="movie" value="/cdn/moto-x3m-2.swf" />
+      <param name="wmode" value="opaque" />
+    </object>
+  </div>
+
+  <script src="/cdn/ruffle/ruffle.js"></script>
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      allowScriptAccess: false,
+      autoplay: "on",
+      unmuteOverlay: "hidden",
+      letterbox: "on"
+    };
+  </script>
+</body>
+</html>
