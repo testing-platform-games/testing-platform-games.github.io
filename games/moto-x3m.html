@@ -1,17 +1,33 @@
-<title>Moto X3M</title>
-<a href="/">Back</a>
-<object type="application/x-shockwave-flash" width="100%" height="100%"> 
-    <param name="movie" value="/cdn/moto-x3m.swf"></param> 
-    <param name="wmode" value="opaque"></param> 
-</object>
-<script src="/cdn/ruffle/ruffle.js"></script>
-<script>
-window.RufflePlayer = window.RufflePlayer || {};
-window.RufflePlayer.config = {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Moto X3M</title>
+  <style>
+    /* ... your styles ... */
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">← Back</a>
+  <div id="game-container">
+    <object type="application/x-shockwave-flash" data="/cdn/moto-x3m.swf" width="800" height="600">
+      <param name="movie" value="/cdn/moto-x3m.swf" />
+      <param name="wmode" value="opaque" />
+    </object>
+  </div>
 
-    "allowScriptAccess": false,
-    "autoplay": "on",
-    "unmuteOverlay": "hidden",
-    "letterbox": "on",
-};
-</script>
+  <script src="/cdn/ruffle/ruffle.js"></script>
+  <script>
+    // Disable right-click menu everywhere on page
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      allowScriptAccess: false,
+      autoplay: "on",
+      unmuteOverlay: "hidden",
+      letterbox: "on",
+    };
+  </script>
+</body>
+</html>
