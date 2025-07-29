@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mario Kart DS (Demo)</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100%;height:100%;">
+        <div id="game"></div>
+    </div>
+
+    <script>
+        EJS_player = "#game";
+        EJS_core = "nds";
+        EJS_gameName = "Mario Kart DS (Demo)";
+        EJS_color = "#ff0000";
+        EJS_startOnLoaded = true;
+        EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+        EJS_gameUrl = "/cdn/mkdsdemo.nds"; // Your demo ROM file
+    </script>
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+</body>
+</html>
