@@ -1,3 +1,40 @@
-<title>Pokemon DP (Shareware Demo)</title>
-<a href="/">Back</a>
-<iframe style="border:1px #FFFFFF none" src="/cdn/poke-dp-swd-embed.html" title="pokemon-dp-swd-embed" width="100%" height="100%" scrolling="no" frameborder="no" allow="fullscreen"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokemon DP (Demo)</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; background: #000;
+      font-family: sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    .back {
+      position: absolute;
+      top: 10px; left: 10px; z-index: 10;
+      color: #0af;
+      text-decoration: none;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back" href="/">&larr; Back</a>
+  <iframe 
+    src="/cdn/poke-dp-swd-embed.html" 
+    title="pokemon-dp-swd-embed" 
+    scrolling="no" 
+    allowfullscreen 
+    frameborder="0">
+  </iframe>
+</body>
+</html>
