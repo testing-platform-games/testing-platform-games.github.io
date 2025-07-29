@@ -7,8 +7,9 @@
     html, body {
       margin: 0;
       padding: 0;
+      background: black;
       height: 100%;
-      background: #000;
+      overflow: hidden;
       font-family: sans-serif;
       color: white;
     }
@@ -18,81 +19,51 @@
       top: 10px;
       left: 10px;
       z-index: 10;
-      color: #fff;
-      text-decoration: none;
-      background: #1e90ff;
-      padding: 8px 16px;
-      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 12px;
+      border-radius: 6px;
       font-weight: bold;
-      border: 2px solid #0a5ec2;
-      box-shadow: 0 0 10px #0a5ec2;
-      transition: background 0.2s ease, transform 0.1s ease;
+      color: #0af;
+      text-decoration: none;
     }
 
-    .back-link:hover {
-      background: #63a9ff;
-      transform: scale(1.05);
-    }
-
-    #game-container {
-      width: 100vw;
+    .letterbox-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+      width: 100vw;
+      background-color: black;
     }
 
-    #rightclick-overlay {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(30, 144, 255, 0.9);
-      color: #fff;
-      padding: 8px 14px;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 9999;
-      user-select: none;
+    .game-wrapper {
+      background-color: black;
+      width: 100%;
+      max-width: calc(100vh * 4 / 3); /* Maintain 4:3 aspect */
+      aspect-ratio: 4 / 3;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    #rightclick-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
+    .game-wrapper object {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
     }
   </style>
 </head>
 <body>
-
-  <a href="/" class="back-link">← Back</a>
-
-  <div id="game-container"></div>
-  <div id="rightclick-overlay">Right-click is disabled on this page</div>
-
+  <a class="back-link" href="/">&larr; Back</a>
+  <div class="letterbox-container">
+    <div class="game-wrapper">
+      <object type="application/x-shockwave-flash" data="/cdn/moto-x3m.swf">
+        <param name="movie" value="/cdn/moto-x3m.swf" />
+        <param name="wmode" value="opaque" />
+      </object>
+    </div>
+  </div>
   <script src="/cdn/ruffle/ruffle.js"></script>
-  <script>
-    const ruffle = window.RufflePlayer?.newest() || window.RufflePlayer?.createPlayer();
-    const container = document.getElementById("game-container");
-    if (ruffle && container) {
-      const player = ruffle.createPlayer();
-      player.style.width = "100%";
-      player.style.height = "100%";
-      container.appendChild(player);
-      player.load("/cdn/moto-x3m.swf");
-    }
-
-    // Right-click warning
-    document.addEventListener('contextmenu', event => {
-      event.preventDefault();
-      const overlay = document.getElementById('rightclick-overlay');
-      if (overlay) {
-        overlay.classList.add('show');
-        clearTimeout(window._rightClickTimeout);
-        window._rightClickTimeout = setTimeout(() => {
-          overlay.classList.remove('show');
-        }, 1500);
-      }
-    });
-  </script>
-
 </body>
 </html>
