@@ -17,3 +17,13 @@
 ### 3/21/25
 - Chex Quest 1 & 2 Released!
 - Updated Ruffle instance
+### 9/16-17/25 and below
+- Nazi Zombies: Portable added
+- Multiple Games added
+- New UI designed
+- Most games fully updated to work with the new UI (and other games that did not work for many days
+- Updated README.md
+- Updated credits.html (donate to the devs of Nazi Zombies: Portable at https://patreon.com/cypressimplex for this great game)
+- Added back button to credits
+- General bug fixes
+- The usual
