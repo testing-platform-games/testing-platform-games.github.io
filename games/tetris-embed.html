@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMBED_DONOTUSE</title>
+    <style>
+        /* Optional: Make the container fill the viewport */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        #game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #game {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="game"></div>
+    </div>
+
+    <script type="text/javascript">
+        // Specify the DOM element to embed the game
+        EJS_player = '#game';
+
+        // Set the core emulator to Game Boy
+        EJS_core = 'gb';
+
+        // URL to the BIOS file if needed (leave empty if not used)
+        EJS_biosUrl = '';
+
+        // URL to the Tetris Game Boy ROM
+        EJS_gameUrl = '/cdn/tetris.gb';
+
+        // Path to additional data
+        EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+    </script>
+
+    <!-- Load the emulator's loader script from the specified data URL -->
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+</body>
+</html>
