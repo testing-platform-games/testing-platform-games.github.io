@@ -1,7 +1,7 @@
 ---
 name: Feature/Game request
 about: Describe this Game/Feature here.
-title: 'Feature and Game request of: [INSERT SHORT DESCRIPTION HERE]'
+title: 'Feature and Game request of: [REPLACE THIS WITH NAME/DESCRIPTION HERE]'
 labels: game-or-feature
 assignees: ''
 
@@ -17,12 +17,14 @@ assignees: ''
 ```text
 Remember these rules:
 
-#1: Game must not contain any 18+ nudity or gore/blood (unnoticeable and little nudity and gore/blood allowed)
+#1: Game must not contain any 18+ nudity or gore/blood (unnoticeable amounts nudity and gore/blood allowed)
 
 #2: It isn't boring
 
 #3: It does not contain religion threatening things within the game
 
 #3: The feature does not cause lag.
+
+#4: It does not anyone's devices
 ```
 ## Do you agree to the terms? (Type yes is you agree, discard the request if no)
