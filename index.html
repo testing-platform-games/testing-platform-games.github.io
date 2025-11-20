@@ -75,6 +75,29 @@
       font-weight: 700;
     }
 
+    /* Install button styled to look like a link */
+    .install-link {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      color: #0077cc;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+    .install-link:hover {
+      text-decoration: underline;
+    }
+
+    /* disabled / already installed style */
+    .install-disabled {
+      color: #888;
+      text-decoration: none;
+      cursor: default;
+      pointer-events: none;
+    }
+
     @media screen and (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -87,6 +110,7 @@
     }
   </style>
   <script>
+    // Register the service worker if available
     if ('serviceWorker' in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register('service-worker.js').then(() => {
@@ -126,6 +150,8 @@
       <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io">GitHub Repository</a></li>
       <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io/issues/new/choose">Game Request and Report Issue</a></li>
       <li><a href="https://cash.app/$SebbyWebby12345">Donate</a></li>
+      <!-- Install PWA option -->
+      <li><button id="install-btn" class="install-link" style="display:none" aria-live="polite">Install PWA</button></li>
     </ul>
   </nav>
 
@@ -225,6 +251,144 @@
 <footer>
   <p>&copy; 2025 Testing Platform Games</p>
 </footer>
+
+<script>
+  // PWA installation prompt handling, installed detection and auto-launch attempt.
+  (function () {
+    let deferredPrompt = null;
+
+    // Helper: Detect if the current context is the PWA (standalone mode)
+    function isRunningInStandalone() {
+      // Standard display-mode check
+      if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+      // iOS
+      if (window.navigator.standalone === true) return true;
+      return false;
+    }
+
+    // Helper: best-effort detection whether the app is installed
+    async function isAppInstalled() {
+      // 1) If browser supports getInstalledRelatedApps and the manifest declares related apps, use it
+      if ('getInstalledRelatedApps' in navigator) {
+        try {
+          const related = await navigator.getInstalledRelatedApps();
+          if (related && related.length > 0) return true;
+        } catch (err) {
+          // ignore
+        }
+      }
+      // 2) Check localStorage flag set when appinstalled fires (persisted after install)
+      try {
+        if (localStorage.getItem('pwa_installed') === 'true') return true;
+      } catch (err) {
+        // ignore private mode localStorage failures
+      }
+      // 3) No reliable global API exists across all platforms — return false if unknown
+      return false;
+    }
+
+    // Try to get start_url from manifest (fallback to '/')
+    async function getManifestStartURL() {
+      try {
+        const resp = await fetch('manifest.json', {cache: 'no-cache'});
+        if (!resp.ok) return '/';
+        const manifest = await resp.json();
+        const start = manifest.start_url || '/';
+        // Resolve relative URLs against current origin
+        return new URL(start, location.href).href;
+      } catch (err) {
+        return '/';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const installBtn = document.getElementById('install-btn');
+      if (!installBtn) return;
+
+      // Hide by default; it will be shown on beforeinstallprompt or when installable
+      installBtn.style.display = 'none';
+
+      // Listen for beforeinstallprompt and show install button
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = 'inline';
+        installBtn.classList.remove('install-disabled');
+        installBtn.disabled = false;
+        installBtn.textContent = 'Install PWA';
+      });
+
+      // Handle clicks on the install button
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        console.log('PWA install outcome:', choice.outcome);
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      });
+
+      // When PWA is installed, the browser fires this event: store a persistent flag
+      window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        try {
+          localStorage.setItem('pwa_installed', 'true');
+        } catch (err) { /* ignore */ }
+        // Update UI if install button exists
+        if (installBtn) {
+          installBtn.textContent = 'Already installed';
+          installBtn.classList.add('install-disabled');
+          installBtn.disabled = true;
+        }
+      });
+
+      // On page load, check if app is installed and not running as standalone.
+      (async () => {
+        const installed = await isAppInstalled();
+        const standalone = isRunningInStandalone();
+
+        if (installed) {
+          // If installed and user is not running the PWA, try to auto-open the PWA and grey out the option
+          if (!standalone) {
+            // Grey out the install option
+            installBtn.style.display = 'inline';
+            installBtn.textContent = 'Already installed';
+            installBtn.classList.add('install-disabled');
+            installBtn.disabled = true;
+
+            // Attempt to open the installed PWA by navigating to its start_url.
+            // Note: There is no standard JS API to "launch" an installed PWA from a regular browser tab.
+            // Best-effort: navigate to the manifest's start_url — on some platforms this will open the installed app
+            // (behavior depends on OS / browser settings). This is a pragmatic attempt, not a guaranteed method.
+            try {
+              const startUrl = await getManifestStartURL();
+              console.log('Attempting to open installed PWA via start_url:', startUrl);
+              // small delay so the UI update (Already installed) is visible before navigation
+              setTimeout(() => {
+                // use location.href to navigate in same tab; on some platforms this may open in the installed app
+                window.location.href = startUrl;
+              }, 300);
+            } catch (err) {
+              console.warn('Failed to auto-open PWA:', err);
+            }
+            return;
+          } else {
+            // Already running in PWA — hide the install button entirely
+            installBtn.style.display = 'none';
+          }
+        } else {
+          // Not installed: show install button only if browser prompt fired (deferredPrompt) or keep it hidden otherwise
+          if (deferredPrompt) {
+            installBtn.style.display = 'inline';
+          } else {
+            // keep the button hidden until beforeinstallprompt fires
+            installBtn.style.display = 'none';
+          }
+        }
+      })();
+    });
+  })();
+</script>
 
 </body>
 </html>
