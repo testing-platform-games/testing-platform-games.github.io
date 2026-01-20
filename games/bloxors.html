@@ -8,37 +8,39 @@
     html, body {
       margin: 0;
       padding: 0;
+      background: black;
       height: 100%;
-      background-color: #000;
+      overflow: hidden;
       font-family: sans-serif;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: #222;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #0af;
+      text-decoration: none;
+    }
+
+    .game-wrapper {
+      background-color: black;
+      width: 100%;
+      max-width: calc(100vh * 4 / 3);
+      aspect-ratio: 4 / 3;
       overflow: hidden;
     }
 
-    .topbar {
-      background-color: #111;
-      color: white;
-      padding: 10px;
-    }
-
-    .topbar a {
-      color: #0af;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .game-container {
-      height: calc(100% - 40px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    object {
+    .game-wrapper object {
       width: 100%;
       height: 100%;
-      max-width: 960px;
-      max-height: 720px;
       border: none;
+      display: block;
+      pointer-events: auto;
     }
   </style>
 </head>
@@ -47,7 +49,7 @@
     <a href="/">← Back</a>
   </div>
 
-  <div class="game-container">
+  <div class="game-wrapper">
     <object type="application/x-shockwave-flash" id="stage" data="/cdn/bloxors.swf" title="Bloxorz">
       <param name="allowScriptAccess" value="sameDomain" />
       <param name="movie" value="/cdn/bloxors.swf" />
