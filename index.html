@@ -137,6 +137,17 @@
       pointer-events: none;
     }
 
+    /* Sub-menu for PWA options */
+    #pwa-submenu {
+      margin-left: 1em;
+      margin-top: 0.5em;
+      display: none;
+    }
+
+    #pwa-submenu li {
+      margin: 0.3em 0;
+    }
+
     /* Accessibility improvements */
     .sr-only {
       position: absolute;
@@ -217,6 +228,10 @@
       <li><a href="https://cash.app/$SebbyWebby12345">Donate</a></li>
       <!-- Install PWA option -->
       <li><button id="install-btn" class="install-link" style="display:none" aria-label="Install PWA">Install PWA</button></li>
+      <!-- PWA submenu for installed app options -->
+      <ul id="pwa-submenu">
+        <li><a href="/autolaunch-tutorial.html">How to set to autostart</a></li>
+      </ul>
     </ul>
   </nav>
 
@@ -354,13 +369,15 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const installBtn = document.getElementById('install-btn');
-      if (!installBtn) {
-        console.warn('Install button element not found');
+      const pwaSubmenu = document.getElementById('pwa-submenu');
+      if (!installBtn || !pwaSubmenu) {
+        console.warn('Install button or submenu element not found');
         return;
       }
 
       // Hide by default; it will be shown on beforeinstallprompt or when installable
       installBtn.style.display = 'none';
+      pwaSubmenu.style.display = 'none';
 
       // Listen for beforeinstallprompt and show install button
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -370,6 +387,7 @@
         installBtn.classList.remove('install-disabled');
         installBtn.disabled = false;
         installBtn.textContent = 'Install PWA';
+        pwaSubmenu.style.display = 'none';
       });
 
       // Handle clicks on the install button
@@ -402,6 +420,7 @@
           installBtn.textContent = 'Already installed';
           installBtn.classList.add('install-disabled');
           installBtn.disabled = true;
+          pwaSubmenu.style.display = 'block';
         }
       });
 
@@ -419,22 +438,23 @@
               installBtn.textContent = 'Already installed';
               installBtn.classList.add('install-disabled');
               installBtn.disabled = true;
+              pwaSubmenu.style.display = 'block';
 
-              // NOTE: Do NOT attempt to auto-launch the PWA with window.location.href or similar,
-              // as there is no standard JavaScript API to launch installed PWAs.
-              // Users should manually open the installed app from their app drawer/home screen.
               console.log('PWA is already installed. User can launch it from their app drawer.');
             } else {
-              // Already running in PWA — hide the install button entirely
+              // Already running in PWA — hide the install button and submenu entirely
               installBtn.style.display = 'none';
+              pwaSubmenu.style.display = 'none';
             }
           } else {
             // Not installed: show install button only if browser prompt fired (deferredPrompt) or keep it hidden otherwise
             if (deferredPrompt) {
               installBtn.style.display = 'inline';
+              pwaSubmenu.style.display = 'none';
             } else {
               // keep the button hidden until beforeinstallprompt fires
               installBtn.style.display = 'none';
+              pwaSubmenu.style.display = 'none';
             }
           }
         } catch (err) {
