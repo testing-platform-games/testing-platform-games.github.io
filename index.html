@@ -3,15 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Testing Platform Games - Games for the ones that don't get support for any!" />
+  <meta name="theme-color" content="#222" />
   <title>Testing Platform Games</title>
   <link rel="manifest" href="manifest.json" />
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f4f4f4;
       color: #333;
+      line-height: 1.6;
     }
 
     header, footer {
@@ -21,14 +28,25 @@
       text-align: center;
     }
 
-    h1, h2 {
+    header {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
       margin-top: 1em;
+    }
+
+    h1 {
+      margin-bottom: 0.5em;
     }
 
     .container {
       display: flex;
       flex-wrap: wrap;
       padding: 1em;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 1em;
     }
 
     nav {
@@ -36,6 +54,10 @@
       background-color: #eee;
       padding: 1em;
       border-right: 2px solid #ccc;
+      border-radius: 8px;
+      height: fit-content;
+      position: sticky;
+      top: 1em;
     }
 
     main {
@@ -55,10 +77,17 @@
     a {
       color: #0077cc;
       text-decoration: none;
+      transition: color 0.2s ease, text-decoration 0.2s ease;
     }
 
     a:hover {
       text-decoration: underline;
+      color: #005fa3;
+    }
+
+    a:focus {
+      outline: 2px solid #0077cc;
+      outline-offset: 2px;
     }
 
     .category {
@@ -67,12 +96,14 @@
       margin-bottom: 1em;
       padding: 1em;
       border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     .genre-title {
       margin: 0 0 0.5em 0;
       font-size: 1.1em;
       font-weight: 700;
+      color: #222;
     }
 
     /* Install button styled to look like a link */
@@ -85,9 +116,17 @@
       cursor: pointer;
       font: inherit;
       text-align: left;
+      transition: color 0.2s ease, text-decoration 0.2s ease;
     }
-    .install-link:hover {
+
+    .install-link:hover:not(:disabled) {
       text-decoration: underline;
+      color: #005fa3;
+    }
+
+    .install-link:focus {
+      outline: 2px solid #0077cc;
+      outline-offset: 2px;
     }
 
     /* disabled / already installed style */
@@ -98,6 +137,19 @@
       pointer-events: none;
     }
 
+    /* Accessibility improvements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
     @media screen and (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -106,6 +158,19 @@
       nav {
         border-right: none;
         border-bottom: 2px solid #ccc;
+        position: static;
+      }
+
+      main {
+        padding: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -116,7 +181,7 @@
         navigator.serviceWorker.register('service-worker.js').then(() => {
           console.log('ServiceWorker registered');
         }).catch((err) => {
-          console.log('ServiceWorker error: ', err);
+          console.error('ServiceWorker registration failed:', err);
         });
       });
     }
@@ -130,8 +195,8 @@
 </header>
 
 <div class="container">
-  <nav>
-    <h3>Browse by genre</h3>
+  <nav aria-label="Main navigation">
+    <h2>Browse by genre</h2>
     <ul>
       <li><a href="#strategy">Strategy / Tower Defense</a></li>
       <li><a href="#adventure">Adventure</a></li>
@@ -151,11 +216,11 @@
       <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io/issues/new/choose">Game Request and Report Issue</a></li>
       <li><a href="https://cash.app/$SebbyWebby12345">Donate</a></li>
       <!-- Install PWA option -->
-      <li><button id="install-btn" class="install-link" style="display:none" aria-live="polite">Install PWA</button></li>
+      <li><button id="install-btn" class="install-link" style="display:none" aria-label="Install PWA">Install PWA</button></li>
     </ul>
   </nav>
 
-  <main>
+  <main role="main">
     <section id="strategy" class="category">
       <h2 class="genre-title">Strategy / Tower Defense</h2>
       <ul>
@@ -249,7 +314,7 @@
 </div>
 
 <footer>
-  <p>&copy; 2025 Testing Platform Games</p>
+  <p>&copy; 2026 Testing Platform Games</p>
 </footer>
 
 <script>
@@ -274,36 +339,25 @@
           const related = await navigator.getInstalledRelatedApps();
           if (related && related.length > 0) return true;
         } catch (err) {
-          // ignore
+          console.debug('getInstalledRelatedApps failed:', err);
         }
       }
       // 2) Check localStorage flag set when appinstalled fires (persisted after install)
       try {
         if (localStorage.getItem('pwa_installed') === 'true') return true;
       } catch (err) {
-        // ignore private mode localStorage failures
+        console.debug('localStorage check failed (might be in private mode):', err);
       }
       // 3) No reliable global API exists across all platforms — return false if unknown
       return false;
     }
 
-    // Try to get start_url from manifest (fallback to '/')
-    async function getManifestStartURL() {
-      try {
-        const resp = await fetch('manifest.json', {cache: 'no-cache'});
-        if (!resp.ok) return '/';
-        const manifest = await resp.json();
-        const start = manifest.start_url || '/';
-        // Resolve relative URLs against current origin
-        return new URL(start, location.href).href;
-      } catch (err) {
-        return '/';
-      }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const installBtn = document.getElementById('install-btn');
-      if (!installBtn) return;
+      if (!installBtn) {
+        console.warn('Install button element not found');
+        return;
+      }
 
       // Hide by default; it will be shown on beforeinstallprompt or when installable
       installBtn.style.display = 'none';
@@ -320,12 +374,19 @@
 
       // Handle clicks on the install button
       installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        console.log('PWA install outcome:', choice.outcome);
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
+        if (!deferredPrompt) {
+          console.warn('Deferred prompt not available');
+          return;
+        }
+        try {
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          console.log('PWA install outcome:', choice.outcome);
+          deferredPrompt = null;
+          installBtn.style.display = 'none';
+        } catch (err) {
+          console.error('PWA installation error:', err);
+        }
       });
 
       // When PWA is installed, the browser fires this event: store a persistent flag
@@ -333,7 +394,9 @@
         console.log('PWA was installed');
         try {
           localStorage.setItem('pwa_installed', 'true');
-        } catch (err) { /* ignore */ }
+        } catch (err) {
+          console.debug('Failed to set localStorage flag:', err);
+        }
         // Update UI if install button exists
         if (installBtn) {
           installBtn.textContent = 'Already installed';
@@ -344,46 +407,38 @@
 
       // On page load, check if app is installed and not running as standalone.
       (async () => {
-        const installed = await isAppInstalled();
-        const standalone = isRunningInStandalone();
+        try {
+          const installed = await isAppInstalled();
+          const standalone = isRunningInStandalone();
 
-        if (installed) {
-          // If installed and user is not running the PWA, try to auto-open the PWA and grey out the option
-          if (!standalone) {
-            // Grey out the install option
-            installBtn.style.display = 'inline';
-            installBtn.textContent = 'Already installed';
-            installBtn.classList.add('install-disabled');
-            installBtn.disabled = true;
+          if (installed) {
+            // If installed and user is not running the PWA, show that it's installed
+            if (!standalone) {
+              // Grey out the install option and show "Already installed" message
+              installBtn.style.display = 'inline';
+              installBtn.textContent = 'Already installed';
+              installBtn.classList.add('install-disabled');
+              installBtn.disabled = true;
 
-            // Attempt to open the installed PWA by navigating to its start_url.
-            // Note: There is no standard JS API to "launch" an installed PWA from a regular browser tab.
-            // Best-effort: navigate to the manifest's start_url — on some platforms this will open the installed app
-            // (behavior depends on OS / browser settings). This is a pragmatic attempt, not a guaranteed method.
-            try {
-              const startUrl = await getManifestStartURL();
-              console.log('Attempting to open installed PWA via start_url:', startUrl);
-              // small delay so the UI update (Already installed) is visible before navigation
-              setTimeout(() => {
-                // use location.href to navigate in same tab; on some platforms this may open in the installed app
-                window.location.href = startUrl;
-              }, 300);
-            } catch (err) {
-              console.warn('Failed to auto-open PWA:', err);
+              // NOTE: Do NOT attempt to auto-launch the PWA with window.location.href or similar,
+              // as there is no standard JavaScript API to launch installed PWAs.
+              // Users should manually open the installed app from their app drawer/home screen.
+              console.log('PWA is already installed. User can launch it from their app drawer.');
+            } else {
+              // Already running in PWA — hide the install button entirely
+              installBtn.style.display = 'none';
             }
-            return;
           } else {
-            // Already running in PWA — hide the install button entirely
-            installBtn.style.display = 'none';
+            // Not installed: show install button only if browser prompt fired (deferredPrompt) or keep it hidden otherwise
+            if (deferredPrompt) {
+              installBtn.style.display = 'inline';
+            } else {
+              // keep the button hidden until beforeinstallprompt fires
+              installBtn.style.display = 'none';
+            }
           }
-        } else {
-          // Not installed: show install button only if browser prompt fired (deferredPrompt) or keep it hidden otherwise
-          if (deferredPrompt) {
-            installBtn.style.display = 'inline';
-          } else {
-            // keep the button hidden until beforeinstallprompt fires
-            installBtn.style.display = 'none';
-          }
+        } catch (err) {
+          console.error('Error during PWA installation check:', err);
         }
       })();
     });
