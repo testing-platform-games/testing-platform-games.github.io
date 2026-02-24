@@ -3,56 +3,313 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloons TD</title>
+  <meta name="description" content="Bloons TD - Play the classic tower defense game" />
+  <meta name="theme-color" content="#000" />
+  <title>Bloons TD - Testing Platform Games</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      background: #000;
       height: 100%;
+      width: 100%;
       overflow: hidden;
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: rgba(34, 34, 34, 0.95);
+      padding: 0.75em 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.3em;
+      color: #fff;
     }
 
     .back-link {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 10;
-      background: #222;
-      padding: 6px 12px;
+      background: #0077cc;
+      padding: 8px 16px;
       border-radius: 4px;
-      font-weight: bold;
-      color: #0af;
+      font-weight: 600;
+      color: #fff;
       text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95em;
+    }
+
+    .back-link:hover {
+      background: #005fa3;
+      transform: translateY(-2px);
+    }
+
+    .back-link:active {
+      transform: translateY(0);
+    }
+
+    .back-link:focus {
+      outline: 2px solid #0af;
+      outline-offset: 2px;
+    }
+
+    .game-container {
+      flex: 1;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
     }
 
     .game-wrapper {
-      background-color: black;
       width: 100%;
-      max-width: calc(100vh * 4 / 3);
-      aspect-ratio: 4 / 3;
+      height: 100%;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .game-wrapper object {
+    .game-wrapper object,
+    .game-wrapper embed {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
       pointer-events: auto;
     }
+
+    /* Loading indicator */
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #0af;
+      font-size: 1.2em;
+      z-index: 5;
+    }
+
+    .loading::after {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0, 170, 255, 0.3);
+      border-top-color: #0af;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 20;
+      background: rgba(0, 170, 255, 0.8);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85em;
+      transition: background 0.2s ease;
+    }
+
+    .fullscreen-btn:hover {
+      background: rgba(0, 170, 255, 1);
+    }
+
+    .fullscreen-btn:focus {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Mobile responsive */
+    @media screen and (max-width: 768px) {
+      .header {
+        padding: 0.5em 0.75em;
+      }
+
+      .header h1 {
+        font-size: 1.1em;
+      }
+
+      .back-link {
+        padding: 6px 12px;
+        font-size: 0.9em;
+      }
+
+      .fullscreen-btn {
+        padding: 6px 10px;
+        font-size: 0.75em;
+        bottom: 5px;
+        right: 5px;
+      }
+    }
+
+    /* Landscape mode adjustments */
+    @media screen and (max-height: 500px) {
+      .header {
+        padding: 0.5em;
+      }
+
+      .header h1 {
+        font-size: 1em;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body oncontextmenu="return false">
-  <a class="back-link" href="/">← Back</a>
-    <div class="game-wrapper">
-      <object type="application/x-shockwave-flash" data="/cdn/bloonstd.swf">
+  <div class="header">
+    <h1>🎮 Bloons TD</h1>
+    <a href="/" class="back-link">← Back Home</a>
+  </div>
+
+  <div class="game-container">
+    <div class="loading" id="loading">Loading game...</div>
+    <div class="game-wrapper" id="gameWrapper">
+      <object type="application/x-shockwave-flash" data="/cdn/bloonstd.swf" id="gameObject">
         <param name="movie" value="/cdn/bloonstd.swf" />
-        <param name="quality" value="low" />
+        <param name="quality" value="high" />
         <param name="wmode" value="opaque" />
+        <param name="allowFullScreen" value="true" />
+        <param name="allowScriptAccess" value="sameDomain" />
       </object>
     </div>
+    <button class="fullscreen-btn" id="fullscreenBtn" aria-label="Toggle fullscreen mode">⛶ Fullscreen</button>
+  </div>
+
   <script src="/cdn/ruffle/ruffle.js"></script>
+  <script>
+    // Game loading management
+    const loading = document.getElementById('loading');
+    const gameWrapper = document.getElementById('gameWrapper');
+    const gameObject = document.getElementById('gameObject');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    // Hide loading indicator after game loads
+    const hideLoading = () => {
+      if (loading) {
+        loading.style.display = 'none';
+      }
+    };
+
+    // Fallback to hide loading after timeout
+    setTimeout(hideLoading, 3000);
+
+    // Listen for game load events
+    gameObject.addEventListener('load', hideLoading);
+    gameWrapper.addEventListener('load', hideLoading);
+
+    // Fullscreen functionality
+    fullscreenBtn.addEventListener('click', () => {
+      const container = document.querySelector('.game-container');
+      
+      if (!document.fullscreenElement) {
+        if (container.requestFullscreen) {
+          container.requestFullscreen().catch(err => {
+            console.warn('Fullscreen request failed:', err);
+            alert('Fullscreen mode not available');
+          });
+        } else if (container.webkitRequestFullscreen) {
+          // Safari
+          container.webkitRequestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+          // Firefox
+          container.mozRequestFullScreen();
+        } else if (container.msRequestFullscreen) {
+          // IE/Edge
+          container.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+    });
+
+    // Update fullscreen button text when fullscreen state changes
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        fullscreenBtn.textContent = '⊡ Exit Fullscreen';
+      } else {
+        fullscreenBtn.textContent = '⛶ Fullscreen';
+      }
+    });
+
+    // Handle keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // F key for fullscreen
+      if (e.key === 'f' || e.key === 'F') {
+        fullscreenBtn.click();
+      }
+      // Escape to go back (if not in fullscreen)
+      if (e.key === 'Escape' && !document.fullscreenElement) {
+        window.location.href = '/';
+      }
+    });
+
+    // Prevent accidental navigation
+    window.addEventListener('beforeunload', (e) => {
+      // Optional: uncomment to warn before leaving
+      // e.preventDefault();
+      // e.returnValue = '';
+    });
+
+    // Log game errors for debugging
+    gameObject.addEventListener('error', (err) => {
+      console.error('Game error:', err);
+    });
+
+    // Improve touch/mobile experience
+    document.addEventListener('touchmove', (e) => {
+      // Allow scrolling only in header area
+      const header = document.querySelector('.header');
+      if (!header.contains(e.target)) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
 </body>
 </html>
