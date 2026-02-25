@@ -1,0 +1,14 @@
+{
+  "games": {
+    "bloonstd": {
+      "title": "🎮 Bloons TD",
+      "description": "Bloons TD - Play the classic tower defense game",
+      "url": "/games/bloonstd.html"
+    },
+    "bloonstd2": {
+      "title": "🎮 Bloons TD 2",
+      "description": "Bloons TD 2 - Play the classic tower defense game",
+      "url": "/games/bloonstd2.html"
+    }
+  }
+}
