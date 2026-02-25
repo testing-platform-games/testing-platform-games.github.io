@@ -161,6 +161,11 @@
       border-width: 0;
     }
 
+    .loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
     @media screen and (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -238,87 +243,42 @@
   <main role="main">
     <section id="strategy" class="category">
       <h2 class="genre-title">Strategy / Tower Defense</h2>
-      <ul>
-        <li><a href="/games/bloonstd.html">Bloons TD</a></li>
-        <li><a href="/games/bloonstd2.html">Bloons TD 2</a></li>
-        <li><a href="/games/bloonstd3.html">Bloons TD 3</a></li>
-        <li><a href="/games/bloonstd4.html">Bloons TD 4</a></li>
-        <li><a href="/games/bloonstd4exp.html">Bloons TD 4 Expansion</a></li>
-        <li><a href="/games/bloonstd5.html">Bloons TD 5</a></li>
-      </ul>
+      <ul id="strategy-games"></ul>
     </section>
 
     <section id="adventure" class="category">
       <h2 class="genre-title">Adventure</h2>
-      <ul>
-        <li><a href="/games/breaking-the-bank.html">Breaking the Bank</a></li>
-        <li><a href="/games/crossing-the-pit.html">Crossing the Pit</a></li>
-        <li><a href="/games/crystal-seeker-3d.html">Crystal Seeker 3D</a></li>
-        <li><a href="/games/escaping-the-prison.html">Escaping the Prison</a></li>
-        <li><a href="/games/fleeing-the-complex.html">Fleeing the Complex</a></li>
-        <li><a href="/games/infiltrating-the-airship.html">Infiltrating the Airship</a></li>
-        <li><a href="/games/mission-in-snowdriftland/">Mission in Snowdriftland</a></li>
-        <li><a href="/games/poke-dp-shareware-demo.html">Pokemon DP (Demo)</a></li>
-        <li><a href="/games/stealing-the-diamond.html">Stealing the Diamond</a></li>
-      </ul>
+      <ul id="adventure-games"></ul>
     </section>
 
     <section id="platformer" class="category">
       <h2 class="genre-title">Platformer</h2>
-      <ul>
-        <li><a href="/games/srbtweb.html">Sonic Robo Blast 2</a></li>
-        <li><a href="/games/super-mario-63.html">Super Mario 63</a></li>
-      </ul>
+      <ul id="platformer-games"></ul>
     </section>
 
     <section id="arcade" class="category">
       <h2 class="genre-title">Arcade</h2>
-      <ul>
-        <li><a href="/games/flappy-bird/">Flappy Bird</a></li>
-        <li><a href="/games/qwop.html">QWOP</a></li>
-        <li><a href="/games/slope-y8.html">Slope (Y8)</a></li>
-        <li><a href="/games/sprinter.html">Sprinter</a></li>
-      </ul>
+      <ul id="arcade-games"></ul>
     </section>
 
     <section id="puzzle" class="category">
       <h2 class="genre-title">Puzzle</h2>
-      <ul>
-        <li><a href="/games/bloxors.html">Bloxors</a></li>
-        <li><a href="/games/tetris.html">Tetris (Gameboy)</a></li>
-      </ul>
+      <ul id="puzzle-games"></ul>
     </section>
 
     <section id="racing" class="category">
       <h2 class="genre-title">Racing</h2>
-      <ul>
-        <li><a href="/games/mkdsdemo.html">Mario Kart DS Demo</a></li>
-        <li><a href="/games/moto-x3m.html">Moto X3M</a></li>
-      </ul>
+      <ul id="racing-games"></ul>
     </section>
 
     <section id="sandbox" class="category">
       <h2 class="genre-title">Sandbox / Simulation</h2>
-      <ul>
-        <li><a href="/games/classicmc.html">Classic Minecraft</a></li>
-        <li><a href="/games/paper-mc.html">Paper Minecraft</a></li>
-      </ul>
+      <ul id="sandbox-games"></ul>
     </section>
 
     <section id="shooter" class="category">
       <h2 class="genre-title">Shooter / FPS</h2>
-      <ul>
-        <li><a href="/games/chex.html">Chex Quest</a></li>
-        <li><a href="/games/chex2.html">Chex Quest 2</a></li>
-        <li><a href="/games/doom-shareware.html">DOOM (Shareware)</a></li>
-        <li><a href="/games/duke3d-shareware.html">Duke Nukem 3D (Shareware)</a></li>
-        <li><a href="/games/freedoom1.html">FreeDOOM Phase 1</a></li>
-        <li><a href="/games/freedoom2.html">FreeDOOM Phase 2</a></li>
-        <li><a href="/games/nzp-web.html">Nazi Zombies: Portable</a></li>
-        <li><a href="/games/quake-shareware.html">Quake (Separate Game files required)</a></li>
-        <li><a href="/games/wolf3d-advisary-warning.html">Wolfenstein 3D (Shareware)</a></li>
-        <li><a href="/games/yadc.html">Yet Another Doom Clone</a></li>
-      </ul>
+      <ul id="shooter-games"></ul>
     </section>
 
     <section id="originals" class="category">
@@ -332,138 +292,7 @@
   <p>&copy; 2026 Testing Platform Games</p>
 </footer>
 
-<script>
-  // PWA installation prompt handling, installed detection and auto-launch attempt.
-  (function () {
-    let deferredPrompt = null;
-
-    // Helper: Detect if the current context is the PWA (standalone mode)
-    function isRunningInStandalone() {
-      // Standard display-mode check
-      if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
-      // iOS
-      if (window.navigator.standalone === true) return true;
-      return false;
-    }
-
-    // Helper: best-effort detection whether the app is installed
-    async function isAppInstalled() {
-      // 1) If browser supports getInstalledRelatedApps and the manifest declares related apps, use it
-      if ('getInstalledRelatedApps' in navigator) {
-        try {
-          const related = await navigator.getInstalledRelatedApps();
-          if (related && related.length > 0) return true;
-        } catch (err) {
-          console.debug('getInstalledRelatedApps failed:', err);
-        }
-      }
-      // 2) Check localStorage flag set when appinstalled fires (persisted after install)
-      try {
-        if (localStorage.getItem('pwa_installed') === 'true') return true;
-      } catch (err) {
-        console.debug('localStorage check failed (might be in private mode):', err);
-      }
-      // 3) No reliable global API exists across all platforms — return false if unknown
-      return false;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const installBtn = document.getElementById('install-btn');
-      const pwaSubmenu = document.getElementById('pwa-submenu');
-      if (!installBtn || !pwaSubmenu) {
-        console.warn('Install button or submenu element not found');
-        return;
-      }
-
-      // Hide by default; it will be shown on beforeinstallprompt or when installable
-      installBtn.style.display = 'none';
-      pwaSubmenu.style.display = 'none';
-
-      // Listen for beforeinstallprompt and show install button
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBtn.style.display = 'inline';
-        installBtn.classList.remove('install-disabled');
-        installBtn.disabled = false;
-        installBtn.textContent = 'Install PWA';
-        pwaSubmenu.style.display = 'none';
-      });
-
-      // Handle clicks on the install button
-      installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) {
-          console.warn('Deferred prompt not available');
-          return;
-        }
-        try {
-          deferredPrompt.prompt();
-          const choice = await deferredPrompt.userChoice;
-          console.log('PWA install outcome:', choice.outcome);
-          deferredPrompt = null;
-          installBtn.style.display = 'none';
-        } catch (err) {
-          console.error('PWA installation error:', err);
-        }
-      });
-
-      // When PWA is installed, the browser fires this event: store a persistent flag
-      window.addEventListener('appinstalled', () => {
-        console.log('PWA was installed');
-        try {
-          localStorage.setItem('pwa_installed', 'true');
-        } catch (err) {
-          console.debug('Failed to set localStorage flag:', err);
-        }
-        // Update UI if install button exists
-        if (installBtn) {
-          installBtn.textContent = 'Already installed';
-          installBtn.classList.add('install-disabled');
-          installBtn.disabled = true;
-          pwaSubmenu.style.display = 'block';
-        }
-      });
-
-      // On page load, check if app is installed and not running as standalone.
-      (async () => {
-        try {
-          const installed = await isAppInstalled();
-          const standalone = isRunningInStandalone();
-
-          if (installed) {
-            // If installed and user is not running the PWA, show that it's installed
-            if (!standalone) {
-              // Grey out the install option and show "Already installed" message
-              installBtn.style.display = 'inline';
-              installBtn.textContent = 'Already installed';
-              installBtn.classList.add('install-disabled');
-              installBtn.disabled = true;
-              pwaSubmenu.style.display = 'block';
-
-              console.log('PWA is already installed. User can launch it from their app drawer.');
-            } else {
-              // Already running in PWA — hide the install button and submenu entirely
-              installBtn.style.display = 'none';
-              pwaSubmenu.style.display = 'none';
-            }
-          } else {
-            // Not installed: show install button only if browser prompt fired (deferredPrompt) or keep it hidden otherwise
-            if (deferredPrompt) {
-              installBtn.style.display = 'inline';
-              pwaSubmenu.style.display = 'none';
-            } else {
-              // keep the button hidden until beforeinstallprompt fires
-              installBtn.style.display = 'none';
-              pwaSubmenu.style.display = 'none';
-            }
-          }
-        } catch (err) {
-          console.error('Error during PWA installation check:', err);
-        }
-      })();
-    });
-  })();
-</script>
-
+<script src="/js/index-loader.js"></script>
+<script src="/js/pwa-installer.js"></script>
 </body>
 </html>
