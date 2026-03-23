@@ -3,296 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Testing Platform Games - Games for the ones that don't get support for any!" />
+  <meta name="description" content="Testing Platform Games - Under Construction" />
   <meta name="theme-color" content="#222" />
-  <title>Testing Platform Games</title>
-  <link rel="manifest" href="manifest.json" />
+  <title>Testing Platform Games - Under Construction</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       margin: 0;
       padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       color: #333;
-      line-height: 1.6;
     }
 
-    header, footer {
-      background-color: #222;
-      color: white;
-      padding: 1em;
+    .under-construction {
       text-align: center;
-    }
-
-    header {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    h1, h2, h3 {
-      margin-top: 1em;
+      max-width: 600px;
+      padding: 2em;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     h1 {
+      font-size: 2em;
       margin-bottom: 0.5em;
     }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 1em;
-      max-width: 1400px;
-      margin: 0 auto;
-      gap: 1em;
-    }
-
-    nav {
-      flex: 1 1 200px;
-      background-color: #eee;
-      padding: 1em;
-      border-right: 2px solid #ccc;
-      border-radius: 8px;
-      height: fit-content;
-      position: sticky;
-      top: 1em;
-    }
-
-    main {
-      flex: 4 1 600px;
-      padding: 1em;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    li {
-      margin: 0.5em 0;
-    }
-
-    a {
-      color: #0077cc;
-      text-decoration: none;
-      transition: color 0.2s ease, text-decoration 0.2s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #005fa3;
-    }
-
-    a:focus {
-      outline: 2px solid #0077cc;
-      outline-offset: 2px;
-    }
-
-    .category {
-      background-color: white;
-      border: 1px solid #ccc;
-      margin-bottom: 1em;
-      padding: 1em;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .genre-title {
-      margin: 0 0 0.5em 0;
-      font-size: 1.1em;
-      font-weight: 700;
-      color: #222;
-    }
-
-    /* Install button styled to look like a link */
-    .install-link {
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      color: #0077cc;
-      cursor: pointer;
-      font: inherit;
-      text-align: left;
-      transition: color 0.2s ease, text-decoration 0.2s ease;
-    }
-
-    .install-link:hover:not(:disabled) {
-      text-decoration: underline;
-      color: #005fa3;
-    }
-
-    .install-link:focus {
-      outline: 2px solid #0077cc;
-      outline-offset: 2px;
-    }
-
-    /* disabled / already installed style */
-    .install-disabled {
-      color: #888;
-      text-decoration: none;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    /* Sub-menu for PWA options */
-    #pwa-submenu {
-      margin-left: 1em;
-      margin-top: 0.5em;
-      display: none;
-    }
-
-    #pwa-submenu li {
-      margin: 0.3em 0;
-    }
-
-    /* Accessibility improvements */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-
-    .loading {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    @media screen and (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      nav {
-        border-right: none;
-        border-bottom: 2px solid #ccc;
-        position: static;
-      }
-
-      main {
-        padding: 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+    p {
+      font-size: 1.2em;
     }
   </style>
-  <script>
-    // Register the service worker if available
-    if ('serviceWorker' in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register('service-worker.js').then(() => {
-          console.log('ServiceWorker registered');
-        }).catch((err) => {
-          console.error('ServiceWorker registration failed:', err);
-        });
-      });
-    }
-  </script>
 </head>
 <body>
-
-<header>
-  <h1>Testing Platform Games</h1>
-  <p><em>"Games for the ones that don't get support for any!"</em></p>
-</header>
-
-<div class="container">
-  <nav aria-label="Main navigation">
-    <h2>Browse by genre</h2>
-    <ul>
-      <li><a href="#strategy">Strategy / Tower Defense</a></li>
-      <li><a href="#adventure">Adventure</a></li>
-      <li><a href="#platformer">Platformer</a></li>
-      <li><a href="#arcade">Arcade</a></li>
-      <li><a href="#puzzle">Puzzle</a></li>
-      <li><a href="#racing">Racing</a></li>
-      <li><a href="#sandbox">Sandbox / Simulation</a></li>
-      <li><a href="#shooter">Shooter / FPS</a></li>
-      <li><a href="#originals">Original Games</a></li>
-    </ul>
-
-    <h3 style="margin-top:1em">Quick Links</h3>
-    <ul>
-      <li><a href="/credits.html">Credits</a></li>
-      <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io">GitHub Repository</a></li>
-      <li><a href="https://github.com/testing-platform-games/testing-platform-games.github.io/issues/new/choose">Game Request and Report Issue</a></li>
-      <li><a href="https://cash.app/$SebbyWebby12345">Donate</a></li>
-      <!-- Install PWA option -->
-      <li><button id="install-btn" class="install-link" style="display:none" aria-label="Install PWA">Install PWA</button></li>
-      <!-- PWA submenu for installed app options -->
-      <ul id="pwa-submenu">
-        <li><a href="/autolaunch-tutorial.html">How to set to autostart</a></li>
-      </ul>
-    </ul>
-  </nav>
-
-  <main role="main">
-    <section id="strategy" class="category">
-      <h2 class="genre-title">Strategy / Tower Defense</h2>
-      <ul id="strategy-games"></ul>
-    </section>
-
-    <section id="adventure" class="category">
-      <h2 class="genre-title">Adventure</h2>
-      <ul id="adventure-games"></ul>
-    </section>
-
-    <section id="platformer" class="category">
-      <h2 class="genre-title">Platformer</h2>
-      <ul id="platformer-games"></ul>
-    </section>
-
-    <section id="arcade" class="category">
-      <h2 class="genre-title">Arcade</h2>
-      <ul id="arcade-games"></ul>
-    </section>
-
-    <section id="puzzle" class="category">
-      <h2 class="genre-title">Puzzle</h2>
-      <ul id="puzzle-games"></ul>
-    </section>
-
-    <section id="racing" class="category">
-      <h2 class="genre-title">Racing</h2>
-      <ul id="racing-games"></ul>
-    </section>
-
-    <section id="sandbox" class="category">
-      <h2 class="genre-title">Sandbox / Simulation</h2>
-      <ul id="sandbox-games"></ul>
-    </section>
-
-    <section id="shooter" class="category">
-      <h2 class="genre-title">Shooter / FPS</h2>
-      <ul id="shooter-games"></ul>
-    </section>
-
-    <section id="originals" class="category">
-      <h2 class="genre-title">Original Games</h2>
-      <p>Coming Soon! (Or never, depends)</p>
-    </section>
-  </main>
-</div>
-
-<footer>
-  <p>&copy; 2026 Testing Platform Games</p>
-</footer>
-
-<script src="/js/index-loader.js"></script>
-<script src="/js/pwa-installer.js"></script>
+  <div class="under-construction">
+    <h1>🚧 Site Under Construction 🚧</h1>
+    <p>Due to the tremendous amounts of broken pages, this website will be under maintenance with no ETA when it will be finished.</p>
+  </div>
 </body>
 </html>
