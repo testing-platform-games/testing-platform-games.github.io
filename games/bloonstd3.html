@@ -3,56 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloons TD 3</title>
+  <meta name="description" content="Bloons TD 3 - Play the classic tower defense game" />
+  <meta name="theme-color" content="#000" />
+  <title>Testing Platform Games - Bloons TD 3</title>
   <style>
+
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      background: #000;
       height: 100%;
+      width: 100%;
       overflow: hidden;
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: rgba(34, 34, 34, 0.95);
+      padding: 0.75em 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.3em;
+      color: #fff;
     }
 
     .back-link {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 10;
-      background: #222;
-      padding: 6px 12px;
+      background: #0077cc;
+      padding: 8px 16px;
       border-radius: 4px;
-      font-weight: bold;
-      color: #0af;
+      font-weight: 600;
+      color: #fff;
       text-decoration: none;
-    }
-
-    .game-wrapper {
-      background-color: black;
-      width: 100%;
-      max-width: calc(100vh * 4 / 3);
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-    }
-
-    .game-wrapper object {
-      width: 100%;
-      height: 100%;
+      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
       border: none;
-      display: block;
-      pointer-events: auto;
+      font-size: 0.95em;
+    }
+
+    .back-link:hover {
+      background: #005fa3;
+      transform: translateY(-2px);
+    }
+
+    .back-link:active {
+      transform: translateY(0);
+    }
+
+    .back-link:focus {
+      outline: 2px solid #0af;
+      outline-offset: 2px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 20;
+      background: rgba(0, 170, 255, 0.8);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85em;
+      transition: background 0.2s ease;
+    }
+
+    .fullscreen-btn:hover {
+      background: rgba(0, 170, 255, 1);
+    }
+
+    .fullscreen-btn:focus {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Mobile responsive */
+    @media screen and (max-width: 768px) {
+      .header {
+        padding: 0.5em 0.75em;
+      }
+
+      .header h1 {
+        font-size: 1.1em;
+      }
+
+      .back-link {
+        padding: 6px 12px;
+        font-size: 0.9em;
+      }
+
+      .fullscreen-btn {
+        padding: 6px 10px;
+        font-size: 0.75em;
+        bottom: 5px;
+        right: 5px;
+      }
+    }
+
+    /* Landscape mode adjustments */
+    @media screen and (max-height: 500px) {
+      .header {
+        padding: 0.5em;
+      }
+
+      .header h1 {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body oncontextmenu="return false">
-  <a class="back-link" href="/">← Back</a>
-    <div class="game-wrapper">
-      <object type="application/x-shockwave-flash" data="/cdn/bloonstd.swf">
-        <param name="movie" value="/cdn/bloonstd3.swf" />
-        <param name="quality" value="low" />
-        <param name="wmode" value="opaque" />
-      </object>
-    </div>
-  <script src="/cdn/ruffle/ruffle.js"></script>
+  <div class="header">
+    <h1>🎮 Bloons TD</h1>
+    <a href="/" class="back-link">← Back Home</a>
+  </div>
+<body>
+    <object>
+        <embed src="/cdn/bloonstd3.swf" width="550" height="400" />
+    </object>
+
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</body>
 </body>
 </html>
