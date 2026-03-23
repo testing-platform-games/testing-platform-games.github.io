@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Bloons TD - Play the classic tower defense game" />
   <meta name="theme-color" content="#000" />
-  <title>Bloons TD - Testing Platform Games</title>
+  <title>Testing Platform Games - Bloons TD</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
 
     html, body {
       margin: 0;
@@ -68,37 +65,7 @@
       outline: 2px solid #0af;
       outline-offset: 2px;
     }
-
-    .game-container {
-      flex: 1;
-      background: #000;
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-    }
-    /* Loading indicator */
-    .loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #0af;
-      font-size: 1.2em;
-      z-index: 5;
-    }
-
-    .loading::after {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0, 170, 255, 0.3);
-      border-top-color: #0af;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-left: 10px;
-    }
-
+    
     @keyframes spin {
       to {
         transform: rotate(360deg);
@@ -164,15 +131,6 @@
         font-size: 1em;
       }
     }
-
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
   </style>
 </head>
 <body oncontextmenu="return false">
@@ -180,113 +138,12 @@
     <h1>🎮 Bloons TD</h1>
     <a href="/" class="back-link">← Back Home</a>
   </div>
-  
-<div class="loading" id="loading">Loading game...</div>
-   <object type="application/x-shockwave-flash" data="/cdn/bloonstd.swf" id="gameObject">
-    <param name="movie" value="/cdn/bloonstd.swf" />
-    <param name="quality" value="high" />
-    <param name="wmode" value="transparent" />
-    <param name="allowFullScreen" value="true" />
-    <param name="allowScriptAccess" value="sameDomain" />
-  </object>
-<button class="fullscreen-btn" id="fullscreenBtn" aria-label="Toggle fullscreen mode">⛶ Fullscreen</button>
+<body>
+    <object>
+        <embed src="/cdn/bloonstd.swf" width="550" height="400" />
+    </object>
 
-  <script src="/cdn/ruffle/ruffle.js"></script>
-  <script>
-    // Game loading management
-    const loading = document.getElementById('loading');
-    const gameWrapper = document.getElementById('gameWrapper');
-    const gameObject = document.getElementById('gameObject');
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-
-    // Hide loading indicator after game loads
-    const hideLoading = () => {
-      if (loading) {
-        loading.style.display = 'none';
-      }
-    };
-
-    // Fallback to hide loading after timeout
-    setTimeout(hideLoading, 3000);
-
-    // Listen for game load events
-    gameObject.addEventListener('load', hideLoading);
-    gameWrapper.addEventListener('load', hideLoading);
-
-    // Fullscreen functionality
-    fullscreenBtn.addEventListener('click', () => {
-      const container = document.querySelector('.game-container');
-      
-      if (!document.fullscreenElement) {
-        if (container.requestFullscreen) {
-          container.requestFullscreen().catch(err => {
-            console.warn('Fullscreen request failed:', err);
-            alert('Fullscreen mode not available');
-          });
-        } else if (container.webkitRequestFullscreen) {
-          // Safari
-          container.webkitRequestFullscreen();
-        } else if (container.mozRequestFullScreen) {
-          // Firefox
-          container.mozRequestFullScreen();
-        } else if (container.msRequestFullscreen) {
-          // IE/Edge
-          container.msRequestFullscreen();
-        }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
-    });
-
-    // Update fullscreen button text when fullscreen state changes
-    document.addEventListener('fullscreenchange', () => {
-      if (document.fullscreenElement) {
-        fullscreenBtn.textContent = '⊡ Exit Fullscreen';
-      } else {
-        fullscreenBtn.textContent = '⛶ Fullscreen';
-      }
-    });
-
-    // Handle keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      // F key for fullscreen
-      if (e.key === 'f' || e.key === 'F') {
-        fullscreenBtn.click();
-      }
-      // Escape to go back (if not in fullscreen)
-      if (e.key === 'Escape' && !document.fullscreenElement) {
-        window.location.href = '/';
-      }
-    });
-
-    // Prevent accidental navigation
-    window.addEventListener('beforeunload', (e) => {
-      // Optional: uncomment to warn before leaving
-      // e.preventDefault();
-      // e.returnValue = '';
-    });
-
-    // Log game errors for debugging
-    gameObject.addEventListener('error', (err) => {
-      console.error('Game error:', err);
-    });
-
-    // Improve touch/mobile experience
-    document.addEventListener('touchmove', (e) => {
-      // Allow scrolling only in header area
-      const header = document.querySelector('.header');
-      if (!header.contains(e.target)) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  </script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</body>
 </body>
 </html>
